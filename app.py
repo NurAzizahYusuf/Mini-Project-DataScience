@@ -48,6 +48,7 @@ ax_daily.set_title('Actual vs. Predicted Close Price (Daily)')
 ax_daily.set_xlabel('Date')
 ax_daily.set_ylabel('Close Price')
 ax_daily.legend()
+st.pyplot(fig_daily)
 
 # Visualisasi grafik untuk Weekly Brent Oil (Moving Average)
 fig_weekly_ma, ax_weekly_ma = plt.subplots(figsize=(12, 6))
@@ -81,7 +82,7 @@ ax_weekly_eks.set_xlabel('Date')
 ax_weekly_eks.set_ylabel('Close Price')
 ax_weekly_eks.legend()
 
-st.pyplot(fig_daily)
+
 st.pyplot(fig_weekly_ma)
 st.pyplot(fig_weekly_eks)
 
