@@ -87,7 +87,7 @@ st.pyplot(fig_weekly_eks)
 # Model Regresi Linier
 if show_heatmap_button == 'Regresi Linear':
     
-    insight_tambahan['Date'] = pd.to_datetime(daily['Date'])
+    insight_tambahan['Date'] = pd.to_datetime(insight_tambahan['Date'])
     insight_tambahan.set_index('Date', inplace=True)
 
     
