@@ -19,6 +19,7 @@ st.title('Grafik Hasil Prediksi')
 
 # Pilihan metode prediksi
 prediction_method = st.sidebar.selectbox('Pilih Metode Prediksi', ['Moving Average', 'Exponential Smoothing'])
+show_heatmap_button = st.button("Tampilkan Heatmap")
 
 # Visualisasi grafik untuk Daily Brent Oil
 fig_daily, ax_daily = plt.subplots(figsize=(12, 6))
@@ -85,6 +86,15 @@ ax_weekly_eks.legend()
 st.pyplot(fig_weekly_ma)
 st.pyplot(fig_weekly_eks)
 
+
+
+if show_heatmap_button:
+    # Visualisasi heatmap
+    correlation_matrix = insight_tambahan[['Close', 'Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']].corr()
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+    plt.title('Heatmap Korelasi Variabel Daily Brent Oil')
+    st.pyplot()
 
 
 # In[ ]:
