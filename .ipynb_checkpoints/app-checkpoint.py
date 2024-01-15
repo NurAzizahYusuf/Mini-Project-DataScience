@@ -3,6 +3,7 @@
 
 # In[2]:
 
+
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -84,6 +85,7 @@ ax_weekly_eks.legend()
 
 st.pyplot(fig_weekly_ma)
 st.pyplot(fig_weekly_eks)
+
 
 
 
