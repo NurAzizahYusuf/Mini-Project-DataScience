@@ -87,8 +87,8 @@ st.pyplot(fig_weekly_eks)
 # Model Regresi Linier
 if show_heatmap_button == 'Regresi Linear':
     # Memisahkan variabel target (Y) dan variabel prediktor (X)
-    X_regression = daily[['Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']]
-    y_regression = daily['Close']
+    X_regression = insight_tambahan[['Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']]
+    y_regression = insight_tambahan['Close']
 
     # Membagi data menjadi set pelatihan dan pengujian (80% training, 20% testing)
     X_train_regression, X_test_regression, y_train_regression, y_test_regression = train_test_split(X_regression, y_regression, test_size=0.2, random_state=42)
