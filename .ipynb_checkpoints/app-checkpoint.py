@@ -10,7 +10,7 @@ import pandas as pd
 from sklearn.metrics import r2_score, mean_squared_error
 
 # Load daily and weekly Brent Oil data
-# insight_tambahan = pd.read_csv('brentcrudeoil - dailybrentoil.csv')
+insight_tambahan = pd.read_csv('brentcrudeoil - dailybrentoil.csv')
 df_daily = pd.read_csv('Hasil-Prediksi.csv')  
 df_weekly_ma = pd.read_csv('hasil_prediksi_ma.csv')  
 df_weekly_eks = pd.read_csv('hasil_prediksi_eks.csv')  
@@ -43,12 +43,12 @@ ax_daily.set_ylabel('Close Price')
 ax_daily.legend()
 st.pyplot(fig_daily)
 
-# # Visualisasi heatmap
-# correlation_matrix = insight_tambahan[['Close', 'Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']].corr()
-# plt.figure(figsize=(10, 8))
-# sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
-# plt.title('Heatmap Korelasi Variabel Daily Brent Oil')
-# st.pyplot()
+# Visualisasi heatmap
+correlation_matrix = insight_tambahan[['Close', 'Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']].corr()
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Heatmap Korelasi Variabel Daily Brent Oil')
+st.pyplot()
 
 # Visualisasi grafik untuk Weekly Brent Oil (Moving Average)
 fig_weekly_ma, ax_weekly_ma = plt.subplots(figsize=(12, 6))
