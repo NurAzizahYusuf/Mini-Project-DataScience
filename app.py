@@ -1,15 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
 import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.metrics import r2_score, mean_squared_error
 
 # Load daily and weekly Brent Oil data
+insight_tambahan = pd.read('brentcrudeoil - dailybrentoil.csv')
 df_daily = pd.read_csv('Hasil-Prediksi.csv')  
 df_weekly_ma = pd.read_csv('hasil_prediksi_ma.csv')  
 df_weekly_eks = pd.read_csv('hasil_prediksi_eks.csv')  
@@ -84,12 +79,3 @@ ax_weekly_eks.legend()
 
 st.pyplot(fig_weekly_ma)
 st.pyplot(fig_weekly_eks)
-
-
-
-
-# In[ ]:
-
-
-
-
