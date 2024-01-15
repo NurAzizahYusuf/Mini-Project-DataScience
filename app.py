@@ -27,11 +27,10 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-st.pyplot(fig_daily)
 # Visualisasi grafik untuk Daily Brent Oil
 fig_daily, ax_daily = plt.subplots(figsize=(12, 6))
 ax_daily.plot(df_daily['Close'], label='Actual Close Price (Daily)', color='blue')
-
+st.pyplot(fig_daily)
 if prediction_method == 'Moving Average':
     ax_daily.plot(df_daily['MA'], label='Predicted Close Price (MA)', color='green', linestyle='dashed')
     r2_score_daily = r2_score(df_daily['Close'], df_daily['MA'])
