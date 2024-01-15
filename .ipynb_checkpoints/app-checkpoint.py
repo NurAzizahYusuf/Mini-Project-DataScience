@@ -19,7 +19,7 @@ st.title('Grafik Hasil Prediksi')
 
 # Pilihan metode prediksi
 prediction_method = st.sidebar.selectbox('Pilih Metode Prediksi', ['Moving Average', 'Exponential Smoothing'])
-show_heatmap_button = st.button("Tampilkan Heatmap")
+show_heatmap_button = st.sidebar.selectbox("Analisa Tambahan", ['Regresi Linear'])
 
 # Visualisasi grafik untuk Daily Brent Oil
 fig_daily, ax_daily = plt.subplots(figsize=(12, 6))
