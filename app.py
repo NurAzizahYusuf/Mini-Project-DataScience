@@ -27,6 +27,7 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
+st.pyplot(fig_daily)
 # Visualisasi grafik untuk Daily Brent Oil
 fig_daily, ax_daily = plt.subplots(figsize=(12, 6))
 ax_daily.plot(df_daily['Close'], label='Actual Close Price (Daily)', color='blue')
@@ -48,7 +49,7 @@ ax_daily.set_title('Actual vs. Predicted Close Price (Daily)')
 ax_daily.set_xlabel('Date')
 ax_daily.set_ylabel('Close Price')
 ax_daily.legend()
-st.pyplot(fig_daily)
+
 
 # Visualisasi grafik untuk Weekly Brent Oil (Moving Average)
 fig_weekly_ma, ax_weekly_ma = plt.subplots(figsize=(12, 6))
@@ -85,9 +86,6 @@ ax_weekly_eks.set_title('Actual vs. Predicted Close Price (Weekly - Exponential 
 ax_weekly_eks.set_xlabel('Date')
 ax_weekly_eks.set_ylabel('Close Price')
 ax_weekly_eks.legend()
-
-
-
 
 # In[ ]:
 
