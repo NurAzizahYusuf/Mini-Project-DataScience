@@ -30,7 +30,7 @@ st.markdown(f"""
 # Visualisasi grafik untuk Daily Brent Oil
 fig_daily, ax_daily = plt.subplots(figsize=(12, 6))
 ax_daily.plot(df_daily['Close'], label='Actual Close Price (Daily)', color='blue')
-st.pyplot(fig_daily)
+
 if prediction_method == 'Moving Average':
     ax_daily.plot(df_daily['MA'], label='Predicted Close Price (MA)', color='green', linestyle='dashed')
     r2_score_daily = r2_score(df_daily['Close'], df_daily['MA'])
@@ -48,7 +48,7 @@ ax_daily.set_title('Actual vs. Predicted Close Price (Daily)')
 ax_daily.set_xlabel('Date')
 ax_daily.set_ylabel('Close Price')
 ax_daily.legend()
-
+st.pyplot(fig_daily)
 
 # Visualisasi grafik untuk Weekly Brent Oil (Moving Average)
 fig_weekly_ma, ax_weekly_ma = plt.subplots(figsize=(12, 6))
@@ -77,14 +77,16 @@ if prediction_method == 'Exponential Smoothing':
     st.write(f'R2 Score (Exponential Smoothing - Weekly): {r2_score_weekly_eks:.4f}')
     st.write(f'Mean Squared Error (Exponential Smoothing - Weekly): {mse_score_weekly_eks:.4f}')
 
-    
-st.pyplot(fig_weekly_ma)
-st.pyplot(fig_weekly_eks)
-
 ax_weekly_eks.set_title('Actual vs. Predicted Close Price (Weekly - Exponential Smoothing)')
 ax_weekly_eks.set_xlabel('Date')
 ax_weekly_eks.set_ylabel('Close Price')
 ax_weekly_eks.legend()
+
+st.pyplot(fig_weekly_ma)
+st.pyplot(fig_weekly_eks)
+
+
+
 
 # In[ ]:
 
