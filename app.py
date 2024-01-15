@@ -86,21 +86,22 @@ st.pyplot(fig_weekly_eks)
 
 # Model Regresi Linier
 if show_heatmap_button == 'Regresi Linear':
-    # Memisahkan variabel target (Y) dan variabel prediktor (X)
+    
+    insight_tambahan['Date'] = pd.to_datetime(daily['Date'])
+    insight_tambahan.set_index('Date', inplace=True)
+
+    
     X_regression = insight_tambahan[['Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']]
     y_regression = insight_tambahan['Close']
 
-    # Membagi data menjadi set pelatihan dan pengujian (80% training, 20% testing)
+    # (80% training, 20% testing)
     X_train_regression, X_test_regression, y_train_regression, y_test_regression = train_test_split(X_regression, y_regression, test_size=0.2, random_state=42)
 
-    # Melatih model Regresi Linier
     model_regression = LinearRegression()
     model_regression.fit(X_train_regression, y_train_regression)
-
-    # Prediksi pada set pengujian
+   
     y_pred_regression = model_regression.predict(X_test_regression)
 
-    # Evaluasi kinerja model
     mse_regression = mean_squared_error(y_test_regression, y_pred_regression)
     r2_regression = r2_score(y_test_regression, y_pred_regression)
 
@@ -113,11 +114,9 @@ if show_heatmap_button == 'Regresi Linear':
     ax_regression.set_ylabel('Close Price')
     ax_regression.legend()
 
-    # Display metrics
     st.write(f'R-squared (R2) - Regresi Linear: {r2_regression:.4f}')
     st.write(f'Mean Squared Error (MSE) - Regresi Linear: {mse_regression:.4f}')
 
-    # Display the plot using Streamlit
     st.pyplot(fig_regression)
 
 
