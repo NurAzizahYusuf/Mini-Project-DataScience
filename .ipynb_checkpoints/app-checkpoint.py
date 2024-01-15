@@ -14,7 +14,7 @@ insight_tambahan = pd.read_csv('brentcrudeoil - dailybrentoil.csv')
 df_daily = pd.read_csv('Hasil-Prediksi.csv')  
 df_weekly_ma = pd.read_csv('hasil_prediksi_ma.csv')  
 df_weekly_eks = pd.read_csv('hasil_prediksi_eks.csv')  
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 st.title('Grafik Hasil Prediksi')
 
 # Pilihan metode prediksi
