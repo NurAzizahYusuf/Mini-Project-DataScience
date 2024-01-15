@@ -24,8 +24,7 @@ st.title('Grafik Hasil Prediksi')
 
 # Pilihan metode prediksi
 prediction_method = st.sidebar.selectbox('Pilih Metode Prediksi', ['Moving Average', 'Exponential Smoothing'])
-show_heatmap_button = st.sidebar.selectbox("Analisa Tambahan", ['Regresi Linear'])
-
+st.sidebar.markdown("[Exploratory Data Analysis](https://github.com/Aimin-Nur/Mini-Project-MSIB-6/blob/main/DailyBrentOil.ipynb)")
 # Visualisasi grafik untuk Daily Brent Oil
 fig_daily, ax_daily = plt.subplots(figsize=(12, 6))
 ax_daily.plot(df_daily['Close'], label='Actual Close Price (Daily)', color='blue')
@@ -83,42 +82,6 @@ ax_weekly_eks.legend()
 
 st.pyplot(fig_weekly_ma)
 st.pyplot(fig_weekly_eks)
-
-# Model Regresi Linier
-if show_heatmap_button == 'Regresi Linear':
-    
-    insight_tambahan['Date'] = pd.to_datetime(daily['Date'])
-    insight_tambahan.set_index('Date', inplace=True)
-
-    
-    X_regression = insight_tambahan[['Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']]
-    y_regression = insight_tambahan['Close']
-
-    # (80% training, 20% testing)
-    X_train_regression, X_test_regression, y_train_regression, y_test_regression = train_test_split(X_regression, y_regression, test_size=0.2, random_state=42)
-
-    model_regression = LinearRegression()
-    model_regression.fit(X_train_regression, y_train_regression)
-   
-    y_pred_regression = model_regression.predict(X_test_regression)
-
-    mse_regression = mean_squared_error(y_test_regression, y_pred_regression)
-    r2_regression = r2_score(y_test_regression, y_pred_regression)
-
-    # Visualisasi prediksi vs. aktual Regresi Linier
-    fig_regression, ax_regression = plt.subplots(figsize=(12, 6))
-    ax_regression.plot(y_test_regression.index, y_test_regression, label='Actual Close Price', color='blue')
-    ax_regression.plot(y_test_regression.index, y_pred_regression, label='Predicted Close Price', color='red', linestyle='dashed')
-    ax_regression.set_title('Actual vs. Predicted Close Price - Regresi Linear')
-    ax_regression.set_xlabel('Date')
-    ax_regression.set_ylabel('Close Price')
-    ax_regression.legend()
-
-    st.write(f'R-squared (R2) - Regresi Linear: {r2_regression:.4f}')
-    st.write(f'Mean Squared Error (MSE) - Regresi Linear: {mse_regression:.4f}')
-
-    st.pyplot(fig_regression)
-
 
 # In[ ]:
 
