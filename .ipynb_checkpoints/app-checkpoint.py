@@ -66,6 +66,9 @@ ax_weekly_ma.set_xlabel('Date')
 ax_weekly_ma.set_ylabel('Close Price')
 ax_weekly_ma.legend()
 
+st.pyplot(fig_weekly_ma)
+st.pyplot(fig_weekly_eks)
+
 # Visualisasi grafik untuk Weekly Brent Oil (Exponential Smoothing)
 fig_weekly_eks, ax_weekly_eks = plt.subplots(figsize=(12, 6))
 ax_weekly_eks.plot(df_weekly_eks['Actual_Close'], label='Actual Close Price (Weekly - Exponential Smoothing)', color='blue')
@@ -81,12 +84,6 @@ ax_weekly_eks.set_title('Actual vs. Predicted Close Price (Weekly - Exponential 
 ax_weekly_eks.set_xlabel('Date')
 ax_weekly_eks.set_ylabel('Close Price')
 ax_weekly_eks.legend()
-
-
-st.pyplot(fig_weekly_ma)
-st.pyplot(fig_weekly_eks)
-
-
 
 
 # In[ ]:
