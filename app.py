@@ -3,10 +3,15 @@
 
 # In[2]:
 
+#!/usr/bin/env python
+# coding: utf-8
+
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error
 
 # Load daily and weekly Brent Oil data
@@ -44,13 +49,6 @@ ax_daily.set_ylabel('Close Price')
 ax_daily.legend()
 st.pyplot(fig_daily)
 
-# Visualisasi heatmap
-correlation_matrix = insight_tambahan[['Close', 'Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']].corr()
-plt.figure(figsize=(10, 8))
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
-plt.title('Heatmap Korelasi Variabel Daily Brent Oil')
-st.pyplot()
-
 # Visualisasi grafik untuk Weekly Brent Oil (Moving Average)
 fig_weekly_ma, ax_weekly_ma = plt.subplots(figsize=(12, 6))
 ax_weekly_ma.plot(df_weekly_ma['Actual_Close'], label='Actual Close Price (Weekly - Moving Average)', color='blue')
@@ -86,15 +84,41 @@ ax_weekly_eks.legend()
 st.pyplot(fig_weekly_ma)
 st.pyplot(fig_weekly_eks)
 
+# Model Regresi Linier
+if show_heatmap_button == 'Regresi Linear':
+    # Memisahkan variabel target (Y) dan variabel prediktor (X)
+    X_regression = daily[['Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']]
+    y_regression = daily['Close']
 
+    # Membagi data menjadi set pelatihan dan pengujian (80% training, 20% testing)
+    X_train_regression, X_test_regression, y_train_regression, y_test_regression = train_test_split(X_regression, y_regression, test_size=0.2, random_state=42)
 
-if show_heatmap_button:
-    # Visualisasi heatmap
-    correlation_matrix = insight_tambahan[['Close', 'Low', 'High', 'chg(close)', 'chg(low)', 'chg(high)']].corr()
-    plt.figure(figsize=(10, 8))
-    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
-    plt.title('Heatmap Korelasi Variabel Daily Brent Oil')
-    st.pyplot()
+    # Melatih model Regresi Linier
+    model_regression = LinearRegression()
+    model_regression.fit(X_train_regression, y_train_regression)
+
+    # Prediksi pada set pengujian
+    y_pred_regression = model_regression.predict(X_test_regression)
+
+    # Evaluasi kinerja model
+    mse_regression = mean_squared_error(y_test_regression, y_pred_regression)
+    r2_regression = r2_score(y_test_regression, y_pred_regression)
+
+    # Visualisasi prediksi vs. aktual Regresi Linier
+    fig_regression, ax_regression = plt.subplots(figsize=(12, 6))
+    ax_regression.plot(y_test_regression.index, y_test_regression, label='Actual Close Price', color='blue')
+    ax_regression.plot(y_test_regression.index, y_pred_regression, label='Predicted Close Price', color='red', linestyle='dashed')
+    ax_regression.set_title('Actual vs. Predicted Close Price - Regresi Linear')
+    ax_regression.set_xlabel('Date')
+    ax_regression.set_ylabel('Close Price')
+    ax_regression.legend()
+
+    # Display metrics
+    st.write(f'R-squared (R2) - Regresi Linear: {r2_regression:.4f}')
+    st.write(f'Mean Squared Error (MSE) - Regresi Linear: {mse_regression:.4f}')
+
+    # Display the plot using Streamlit
+    st.pyplot(fig_regression)
 
 
 # In[ ]:
