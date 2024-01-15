@@ -77,13 +77,14 @@ if prediction_method == 'Exponential Smoothing':
     st.write(f'R2 Score (Exponential Smoothing - Weekly): {r2_score_weekly_eks:.4f}')
     st.write(f'Mean Squared Error (Exponential Smoothing - Weekly): {mse_score_weekly_eks:.4f}')
 
+    
+st.pyplot(fig_weekly_ma)
+st.pyplot(fig_weekly_eks)
+
 ax_weekly_eks.set_title('Actual vs. Predicted Close Price (Weekly - Exponential Smoothing)')
 ax_weekly_eks.set_xlabel('Date')
 ax_weekly_eks.set_ylabel('Close Price')
 ax_weekly_eks.legend()
-
-st.pyplot(fig_weekly_ma)
-st.pyplot(fig_weekly_eks)
 
 
 
