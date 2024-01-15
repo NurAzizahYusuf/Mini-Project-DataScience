@@ -2,7 +2,8 @@
 # coding: utf-8
 
 # In[2]:
-
+import subprocess
+subprocess.run(["pip", "install", "seaborn>=0.11.2"])
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
